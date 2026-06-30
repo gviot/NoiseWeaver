@@ -1,0 +1,24 @@
+# Copy to `noiseweaver.toml` (or point NOISEWEAVER_CONFIG at this file). Secrets live in the
+# environment (P4PASSWD), never here. Each [repos.<name>] is a logical repo NoiseWeaver resolves to
+# a local working path; your pipeline only ever sees that path. A Perforce stream, once synced, IS
+# that folder — NoiseWeaver manages the workspace (client spec + login) for you.
+
+[repos.assets]
+kind   = "perforce"
+port   = "ssl:perforce.example.com:1666"
+user   = "you"
+stream = "//assets/main"
+client = "assets-mac-you"      # the workspace name NoiseWeaver creates/updates (idempotent)
+root   = "~/p4/assets"         # local dir it syncs into
+
+[repos.staging]
+kind = "local"                 # or "perforce" with the same fields as above
+root = "./staging"
+
+# Compute routing: WHERE a model runs. A resident local daemon hosts what it can fit; the router
+# spills anything it can't (a bigger weight, or no daemon) to the offload backends below, in
+# `prefer` order. The backend never changes the pixels, so it is not part of any content hash.
+[compute]
+runpod = false                 # true once a RunPod offload is configured
+k8s    = false                 # true once a Kubernetes NVIDIA-GPU job backend is configured
+prefer = ["local", "runpod", "k8s"]

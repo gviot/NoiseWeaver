@@ -1,0 +1,34 @@
+[project]
+name = "noiseweaver"
+version = "0.1.0"
+description = "A rebrandable, polyglot platform shell for AI asset pipelines — pluggable pipelines, local-or-cloud compute, local|Perforce storage."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Guillaume Viot" }]
+dependencies = [
+    "gradio>=4.44",         # the rebrandable web shell
+    "requests>=2.31",       # RunPod GraphQL + ComfyUI HTTP (noiseweaver.pod / noiseweaver.compute)
+    "paramiko>=3.4",        # persistent control SSH + port tunnel to a rented pod (noiseweaver.pod)
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.6", "pytest>=8.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["noiseweaver"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
