@@ -4,8 +4,25 @@ version = "0.1.0"
 description = "A rebrandable, polyglot platform shell for AI asset pipelines — pluggable pipelines, local-or-cloud compute, local|Perforce storage."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Guillaume Viot" }]
+keywords = [
+    "ai", "asset-pipeline", "build-system", "content-addressed",
+    "compute-scheduler", "comfyui", "perforce", "gradio", "plugin",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
 dependencies = [
     "gradio>=4.44",         # the rebrandable web shell
     "requests>=2.31",       # RunPod GraphQL + ComfyUI HTTP (noiseweaver.pod / noiseweaver.compute)
@@ -15,8 +32,13 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["ruff>=0.6", "pytest>=8.0", "pre-commit>=3.7"]
 
+[project.urls]
+Homepage = "https://github.com/gviot/NoiseWeaver"
+Repository = "https://github.com/gviot/NoiseWeaver"
+Issues = "https://github.com/gviot/NoiseWeaver/issues"
+
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.27"]   # >=1.27 for PEP 639 SPDX license + license-files
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]

@@ -103,7 +103,7 @@ staging is built on (hardlink materialization, safe to back up as a plain folder
 
 To back a repo with a local, password-protected, checkpoint-backed Perforce server (and how to
 fold-back-up Perforce safely with Backblaze), see
-[`docs/perforce-local-server.md`](docs/perforce-local-server.md).
+[`docs/perforce-local-server.md`](https://github.com/gviot/NoiseWeaver/blob/main/docs/perforce-local-server.md).
 
 ## Pod — `noiseweaver.pod`
 
@@ -122,12 +122,12 @@ launch(MyPipelinePlugin(), my_config)    # serves the rebranded UI on the LAN
 
 A plugin implements three methods — `branding()`, `build_header(config)`, `tabs()`. The shell owns
 the chrome; set `NOISEWEAVER_TITLE` / `NOISEWEAVER_SUBTITLE` to rebrand without code. See
-[`noiseweaver/plugin.py`](noiseweaver/plugin.py).
+[`noiseweaver/plugin.py`](https://github.com/gviot/NoiseWeaver/blob/main/noiseweaver/plugin.py).
 
 ## Configuration
 
 `noiseweaver.toml` (path via `NOISEWEAVER_CONFIG`) — repos + the compute policy; secrets come from
-the environment, never the file. See [`noiseweaver.example.toml`](noiseweaver.example.toml).
+the environment, never the file. See [`noiseweaver.example.toml`](https://github.com/gviot/NoiseWeaver/blob/main/noiseweaver.example.toml).
 
 ```toml
 [repos.assets]

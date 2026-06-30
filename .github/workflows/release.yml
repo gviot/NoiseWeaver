@@ -1,0 +1,21 @@
+name: release
+
+# Tag a release and push the tag to publish to PyPI via Trusted Publishing (OIDC) — no API token.
+#   git tag v0.1.0 && git push origin v0.1.0
+# The package version comes from pyproject.toml, so bump it before tagging.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  pypi-publish:
+    name: Build & publish to PyPI
+    runs-on: ubuntu-latest
+    environment: pypi          # must match the environment name set on PyPI + a GitHub env of this name
+    permissions:
+      id-token: write          # REQUIRED: lets GitHub mint the short-lived OIDC token PyPI trusts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build
+      - uses: pypa/gh-action-pypi-publish@release/v1
