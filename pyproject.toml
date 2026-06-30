@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["ruff>=0.6", "pytest>=8.0"]
+dev = ["ruff>=0.6", "pytest>=8.0", "pre-commit>=3.7"]
 
 [build-system]
 requires = ["hatchling"]
@@ -27,7 +27,11 @@ line-length = 100
 target-version = "py311"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+# E/F/I/UP/B = style, pyflakes, import-sort, pyupgrade, bugbear.
+# D100/D104/D419 = every module & package keeps a real (non-empty) docstring. The *richer* doc
+# standard (explain what + why) is a review rule in CLAUDE.md, not a linter — forcing a docstring
+# on every method (D102) produces box-ticking noise, not nice docs.
+select = ["E", "F", "I", "UP", "B", "D100", "D104", "D419"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

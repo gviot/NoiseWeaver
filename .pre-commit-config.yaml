@@ -1,0 +1,26 @@
+# Local quality gates for this public repo. Enable once:
+#     uv sync --extra dev && uv run pre-commit install
+# Thereafter every `git commit` runs, in order: the IP-free guard, ruff, and the test suite.
+# Run by hand with:  uv run pre-commit run --all-files
+repos:
+  - repo: local
+    hooks:
+      - id: ip-free-guard
+        name: IP-free guard (no proprietary names)
+        entry: python3 scripts/check_ip_free.py
+        language: system
+        types: [text]
+
+      - id: ruff
+        name: ruff (lint)
+        entry: uv run ruff check --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+
+      - id: pytest
+        name: pytest (no external services)
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        always_run: true

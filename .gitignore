@@ -219,3 +219,6 @@ __marimo__/
 
 # local platform config (has your p4 server/user); copy from noiseweaver.example.toml
 noiseweaver.toml
+
+# IP-free guard denylist — holds private codenames; MUST stay local (see CLAUDE.md + scripts/check_ip_free.py)
+.ip-denylist
